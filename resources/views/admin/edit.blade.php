@@ -8,8 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- DaisyUI CDN -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@1.14.0/dist/full.css" rel="stylesheet">
-    <!-- Select2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body class="bg-gray-100">
     <div class="flex items-center justify-center min-h-screen">
@@ -49,117 +47,31 @@
                     </label>
                     <input type="email" id="email" name="email" class="input input-bordered w-full" value="{{ old('email', $user->email) }}" required>
                 </div>
-          
                 <div class="form-control">
-                    <label class="label" for="alamat_ktp">
-                        <span class="label-text">Alamat KTP</span>
+                    <label class="label" for="password">
+                        <span class="label-text">Password</span>
                     </label>
-                    <input type="text" id="alamat_ktp" name="alamat_ktp" class="input input-bordered w-full" value="{{ old('alamat_ktp', $user->alamat_ktp) }}">
+                    <input type="password" id="password" name="password" class="input input-bordered w-full">
+                    <small class="text-gray-500">Leave blank to keep current password</small>
                 </div>
                 <div class="form-control">
-                    <label class="label" for="alamat_saat_ini">
-                        <span class="label-text">Alamat Saat Ini</span>
+                    <label class="label" for="role_id">
+                        <span class="label-text">Role</span>
                     </label>
-                    <input type="text" id="alamat_saat_ini" name="alamat_saat_ini" class="input input-bordered w-full" value="{{ old('alamat_saat_ini', $user->alamat_saat_ini) }}">
-                </div>
-                <div class="form-control">
-                    <label class="label" for="provinsi">
-                        <span class="label-text">Provinsi</span>
-                    </label>
-                    <select id="provinsi" name="provinsi" class="select select-bordered w-full">
-                        <option value="">{{ __('Pilih Provinsi') }}</option>
+                    <select id="role_id" name="role_id" class="select select-bordered w-full" required>
+                        @foreach($roles as $role)
+                            <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
+                        @endforeach
                     </select>
                 </div>
-                <div class="form-control">
-                    <label class="label" for="kabupaten">
-                        <span class="label-text">Kabupaten</span>
-                    </label>
-                    <select id="kabupaten" name="kabupaten" class="select select-bordered w-full">
-                        <option value="">{{ __('Pilih Kabupaten') }}</option>
-                    </select>
-                </div>
-       
-                <div class="form-control">
-                    <label class="label" for="nomor_telepon">
-                        <span class="label-text">Nomor Telepon</span>
-                    </label>
-                    <input type="text" id="nomor_telepon" name="nomor_telepon" class="input input-bordered w-full" value="{{ old('nomor_telepon', $user->nomor_telepon) }}">
-                </div>
-                <div class="form-control">
-                    <label class="label" for="nomor_hp">
-                        <span class="label-text">Nomor HP</span>
-                    </label>
-                    <input type="text" id="nomor_hp" name="nomor_hp" class="input input-bordered w-full" value="{{ old('nomor_hp', $user->nomor_hp) }}">
-                </div>
-                <div class="form-control">
-                    <label class="label" for="kewarganegaraan">
-                        <span class="label-text">Kewarganegaraan</span>
-                    </label>
-                    <select id="kewarganegaraan" name="kewarganegaraan" class="select select-bordered w-full">
-                        <option value="WNI Asli" {{ $user->kewarganegaraan == 'WNI Asli' ? 'selected' : '' }}>WNI Asli</option>
-                        <option value="WNI Keturunan" {{ $user->kewarganegaraan == 'WNI Keturunan' ? 'selected' : '' }}>WNI Keturunan</option>
-                        <option value="WNA" {{ $user->kewarganegaraan == 'WNA' ? 'selected' : '' }}>WNA</option>
-                    </select>
-                </div>
-                <div class="form-control">
-                    <label class="label" for="tanggal_lahir">
-                        <span class="label-text">Tanggal Lahir</span>
-                    </label>
-                    <input type="date" id="tanggal_lahir" name="tanggal_lahir" class="input input-bordered w-full" value="{{ old('tanggal_lahir', $user->tanggal_lahir) }}">
-                </div>
-                <div class="form-control">
-                    <label class="label" for="tempat_lahir">
-                        <span class="label-text">Tempat Lahir</span>
-                    </label>
-                    <input type="text" id="tempat_lahir" name="tempat_lahir" class="input input-bordered w-full" value="{{ old('tempat_lahir', $user->tempat_lahir) }}">
-                </div>
-                <div class="form-control">
-                    <label class="label" for="jenis_kelamin">
-                        <span class="label-text">Jenis Kelamin</span>
-                    </label>
-                    <select id="jenis_kelamin" name="jenis_kelamin" class="select select-bordered w-full">
-                        <option value="Pria" {{ $user->jenis_kelamin == 'Pria' ? 'selected' : '' }}>Pria</option>
-                        <option value="Wanita" {{ $user->jenis_kelamin == 'Wanita' ? 'selected' : '' }}>Wanita</option>
-                    </select>
-                </div>
-                <div class="form-control">
-                    <label class="label" for="status_menikah">
-                        <span class="label-text">Status Menikah</span>
-                    </label>
-                    <select id="status_menikah" name="status_menikah" class="select select-bordered w-full">
-                        <option value="Belum Menikah" {{ $user->status_menikah == 'Belum Menikah' ? 'selected' : '' }}>Belum Menikah</option>
-                        <option value="Menikah" {{ $user->status_menikah == 'Menikah' ? 'selected' : '' }}>Menikah</option>
-                        <option value="Lain-lain" {{ $user->status_menikah == 'Lain-lain' ? 'selected' : '' }}>Lain-lain (Janda/Duda)</option>
-                    </select>
-                </div>
-                <div class="form-control">
-                    <label class="label" for="agama">
-                        <span class="label-text">Agama</span>
-                    </label>
-                    <select id="agama" name="agama" class="select select-bordered w-full">
-                        <option value="Islam" {{ $user->agama == 'Islam' ? 'selected' : '' }}>Islam</option>
-                        <option value="Katolik" {{ $user->agama == 'Katolik' ? 'selected' : '' }}>Katolik</option>
-                        <option value="Kristen" {{ $user->agama == 'Kristen' ? 'selected' : '' }}>Kristen</option>
-                        <option value="Hindu" {{ $user->agama == 'Hindu' ? 'selected' : '' }}>Hindu</option>
-                        <option value="Budha" {{ $user->agama == 'Budha' ? 'selected' : '' }}>Budha</option>
-                    </select>
-                </div>
-                <div class="form-control">
-    <label class="label" for="role_id">
-        <span class="label-text">Role</span>
-    </label>
-    <select id="role_id" name="role_id" class="select select-bordered w-full" required>
-        @foreach($roles as $role)
-            <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
-        @endforeach
-    </select>
-</div>
                 <div class="form-control mt-6">
                     <button type="submit" class="btn btn-primary w-full">Update User</button>
                 </div>
             </form>
         </div>
     </div>
+</body>
+</html>
 
     <!-- Include Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

@@ -48,7 +48,8 @@
                 <a href="{{ route('admin.create') }}" class="btn btn-primary mb-4">Create User</a>
 
                 <!-- Users Table -->
-                <div class="overflow-x-auto">
+                <div class="overflow-x-auto mb-8">
+                    <h1 class="text-2xl font-bold mb-2 mt-10">Data User</h1>
                     <table class="table w-full">
                         <thead>
                             <tr>
@@ -56,19 +57,6 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
-                                <th>Alamat KTP</th>
-                                <th>Alamat Saat Ini</th>
-                                <th>Kecamatan</th>
-                                <th>Kabupaten</th>
-                                <th>Provinsi</th>
-                                <th>Nomor Telepon</th>
-                                <th>Nomor HP</th>
-                                <th>Kewarganegaraan</th>
-                                <th>Tanggal Lahir</th>
-                                <th>Tempat Lahir</th>
-                                <th>Jenis Kelamin</th>
-                                <th>Status Menikah</th>
-                                <th>Agama</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -79,19 +67,6 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->role->name }}</td>
-                                    <td>{{ $user->alamat_ktp }}</td>
-                                    <td>{{ $user->alamat_saat_ini }}</td>
-                                    <td>{{ $user->kecamatan }}</td>
-                                    <td>{{ $user->kabupaten }}</td>
-                                    <td>{{ $user->provinsi }}</td>
-                                    <td>{{ $user->nomor_telepon }}</td>
-                                    <td>{{ $user->nomor_hp }}</td>
-                                    <td>{{ $user->kewarganegaraan }}</td>
-                                    <td>{{ $user->tanggal_lahir }}</td>
-                                    <td>{{ $user->tempat_lahir }}</td>
-                                    <td>{{ $user->jenis_kelamin }}</td>
-                                    <td>{{ $user->status_menikah }}</td>
-                                    <td>{{ $user->agama }}</td>
                                     <td>
                                         @if($user->role->name == 'guest')
                                             <form action="{{ route('admin.verify', $user->id) }}" method="POST" class="inline">
@@ -112,6 +87,57 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="overflow-x-auto">
+    <h1 class="text-2xl font-bold mb-2 mt-10">Data Mahasiswa</h1>
+    <table class="table w-full">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User Name</th>
+                <th>Alamat Saat Ini</th>
+                <th>Kabupaten</th>
+                <th>Provinsi</th>
+                <th>Nomor Telepon</th>
+                <th>Nomor HP</th>
+                <th>Kewarganegaraan</th>
+                <th>Tanggal Lahir</th>
+                <th>Tempat Lahir</th>
+                <th>Jenis Kelamin</th>
+                <th>Status Menikah</th>
+                <th>Agama</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($mahasiswas as $mahasiswa)
+                <tr>
+                    <td>{{ $mahasiswa->id }}</td>
+                    <td>{{ $mahasiswa->user->name }}</td>
+                    <td>{{ $mahasiswa->alamat_saat_ini }}</td>
+                    <td>{{ $mahasiswa->kabupaten }}</td>
+                    <td>{{ $mahasiswa->provinsi }}</td>
+                    <td>{{ $mahasiswa->nomor_telepon }}</td>
+                    <td>{{ $mahasiswa->nomor_hp }}</td>
+                    <td>{{ $mahasiswa->kewarganegaraan }}</td>
+                    <td>{{ $mahasiswa->tanggal_lahir }}</td>
+                    <td>{{ $mahasiswa->tempat_lahir }}</td>
+                    <td>{{ $mahasiswa->jenis_kelamin }}</td>
+                    <td>{{ $mahasiswa->status_menikah }}</td>
+                    <td>{{ $mahasiswa->agama }}</td>
+                    <td>
+                        <a href="{{ route('mahasiswa.edit', $mahasiswa->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <form action="{{ route('mahasiswa.destroy', $mahasiswa->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-error">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
             </div>
         </div>
     </div>

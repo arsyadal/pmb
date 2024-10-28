@@ -13,35 +13,39 @@
     <div class="min-h-screen flex flex-col">
         <!-- Navbar -->
         <nav class="bg-white shadow-md">
-    <div class="container mx-auto px-6 py-3">
-        <div class="flex justify-between items-center">
-            <div class="text-xl font-bold">Mahasiswa Dashboard</div>
-            <div class="flex space-x-4 items-center">
-                <a href="#" class="text-gray-700 hover:text-gray-900">Home</a>
-                     
-                @if(Auth::user()->profile_picture)
-                    <img src="{{ asset('storage/images/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="w-10 h-10 rounded-full">
-                @else
-                    <img src="{{ asset('default-profile.png') }}" alt="Default Profile Picture" class="w-10 h-10 rounded-full">
-                @endif
+            <div class="container mx-auto px-6 py-3">
+                <div class="flex justify-between items-center">
+                    <div class="text-xl font-bold">Mahasiswa Dashboard</div>
+                    <div class="flex space-x-4 items-center">
+                        <a href="#" class="text-gray-700 hover:text-gray-900">Home</a>
+                             
+                        @if(Auth::user()->profile_picture)
+                            <img src="{{ asset('storage/images/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="w-10 h-10 rounded-full">
+                        @else
+                            <img src="{{ asset('default-profile.png') }}" alt="Default Profile Picture" class="w-10 h-10 rounded-full">
+                        @endif
 
-                <a href="{{ route('profile.edit') }}" class="text-gray-700 hover:text-gray-900">Profile</a>
-      
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-error">Logout</button>
-                </form>
+                        <a href="{{ route('profile.edit') }}" class="text-gray-700 hover:text-gray-900">Profile</a>
+              
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-error">Logout</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</nav>
+        </nav>
 
-        <!-- Main Content -->
-        <div class="flex-grow container mx-auto px-6 py-8">
+         <!-- Main Content -->
+         <div class="flex-grow container mx-auto px-6 py-8">
             <div class="bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-bold mb-4">Welcome, Mahasiswa!</h2>
-                <p class="text-gray-700">This is your mahasiswa dashboard where you can view your courses, profile, and more.</p>
-                <!-- Add more content here -->
+                <h2 class="text-2xl font-bold mb-4">Welcome, {{ Auth::user()->name }}!</h2>
+                @if(Auth::user()->mahasiswa)
+                    <p class="text-gray-700">Anda telah mengisi data diri.</p>
+                @else
+                    <p class="text-gray-700">Silahkan isi data diri terlebih dahulu</p>
+                    <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary mt-4">Isi Data Mahasiswa</a>
+                @endif
             </div>
         </div>
     </div>

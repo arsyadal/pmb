@@ -12,8 +12,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password', 'role_id', 'alamat_ktp', 'alamat_saat_ini', 'kabupaten', 'provinsi',
-        'nomor_telepon', 'nomor_hp', 'kewarganegaraan', 'tanggal_lahir', 'tempat_lahir', 'jenis_kelamin', 'status_menikah', 'agama'
+        'name', 'email', 'password', 'role_id'
     ];
 
     protected $hidden = [
@@ -27,5 +26,10 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function mahasiswa()
+    {
+        return $this->hasOne(Mahasiswa::class);
     }
 }

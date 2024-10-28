@@ -52,4 +52,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mahasiswa/{id}/edit', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
     Route::put('/mahasiswa/{id}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
     Route::delete('/mahasiswa/{id}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
+    Route::get('/mahasiswa/{id}/export-pdf', [MahasiswaController::class, 'exportPdf'])->name('mahasiswa.exportPdf');
+
 });

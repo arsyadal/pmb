@@ -42,6 +42,8 @@
                 <h2 class="text-2xl font-bold mb-4">Welcome, {{ Auth::user()->name }}!</h2>
                 @if(Auth::user()->mahasiswa)
                     <p class="text-gray-700">Anda telah mengisi data diri.</p>
+                    <a href="{{ route('mahasiswa.exportPdf', Auth::user()->mahasiswa->id) }}" class="btn btn-primary mt-4">Ekspor Data ke PDF</a>
+
                 @else
                     <p class="text-gray-700">Silahkan isi data diri terlebih dahulu</p>
                     <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary mt-4">Isi Data Mahasiswa</a>
